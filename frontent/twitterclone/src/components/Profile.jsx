@@ -1,9 +1,18 @@
 import React from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Avatar from "react-avatar";
+import useGetProfile from '../hooks/useGetProfile';
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
+
+  const {user, profile} = useSelector(store=>store.user);
+
+  const {id} = useParams();
+
+  useGetProfile(id);
+
   return (
     <div className="w-[50%] border-l border-r border-gray-200">
       <div className="w-[100%]">
@@ -15,7 +24,7 @@ const Profile = () => {
             <IoMdArrowRoundBack size={"24px"} />
           </Link>
           <div className="px-1">
-            <h1 className="font-bold text-lg">Trilok Singh</h1>
+            <h1 className="font-bold text-lg">{profile?.name}</h1>
             <p className="text-gray-600 text-sm">10 Post</p>
           </div>
         </div>
@@ -31,8 +40,8 @@ const Profile = () => {
                 <button className="px-4 py-1 rounded-full text-right border border-gray-400 hover:bg-gray-200 font-bold text-md">Edit Profile</button>
             </div>
             <div className="mt-8 m-4">
-                <h1 className="font-bold text-xl">Trilok Singh</h1>
-                <p>@triloksingh</p>
+                <h1 className="font-bold text-xl">{profile?.name}</h1>
+                <p>{`@${profile?.username}`}</p>
             </div>
             <div className="m-4 text-sm">
                 <p>Bio:lorem10 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, tempore? Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, corrupti!</p>

@@ -6,8 +6,12 @@ import { FaUserCircle } from "react-icons/fa";
 import { IoBookmarksSharp } from "react-icons/io5";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import {Link} from "react-router-dom"
+import { useSelector } from 'react-redux';
 
 const LeftSideBar = () => {
+
+  const {user} = useSelector(store=>store.user);
+
   return (
     <div className='w-[20%]'>
       <div>
@@ -29,7 +33,7 @@ const LeftSideBar = () => {
             <h1 className='font-bold text-lg ml-2'>Notifications</h1>
         </div>
 
-        <Link to="/profile" className="flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full">
+        <Link to={`/profile/${user?._id}`} className="flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full">
             <div><FaUserCircle size={"24px"}/></div>
             <h1 className='font-bold text-lg ml-2'>Profile</h1>
         </Link>
